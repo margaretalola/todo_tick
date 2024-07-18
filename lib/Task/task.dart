@@ -68,10 +68,10 @@ class TaskPageState extends State<TaskPage> {
               // ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            // child: quill.QuillToolbar.basic(controller: notes),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          //   // child: quill.QuillToolbar.basic(controller: notes),
+          // ),
         ],
       ),
       bottomNavigationBar: Buttonnavigation(),
@@ -109,7 +109,7 @@ class TaskPageState extends State<TaskPage> {
             onTap: () => Get.to(() => AddTaskPage(
               title: title,
               description: description,
-              notes: notes,
+              // notes: notes,
               category: [],
               reminder: [],
             )),

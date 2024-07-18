@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todotick/Task/task.dart';
+import 'package:todotick/calendar/calendar.dart';
+import 'package:todotick/profile/profile.dart';
 import 'AppState.dart';
 import '../Homepage/homepage.dart';
 
@@ -27,10 +29,17 @@ class Buttonnavigation extends StatelessWidget {
                 );
                 break;
               case 2:
-              // page calendar
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => CalendarPage()),
+                );
+                break;
                 break;
               case 3:
-              // page profile
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) =>Profile())
+                );
                 break;
             }
           },

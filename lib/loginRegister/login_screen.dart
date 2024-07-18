@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/Logo.jpg',
+                  'assets/image.jpg',
                   height: 100,
                 ),
                 SizedBox(height: 20),
@@ -53,7 +53,12 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => Homepage(),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Homepage()),
+                    );
+                  },
                   child: Text('Login'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF242F9B),

@@ -41,6 +41,7 @@ dependencies:
   date_picker_timeline: ^1.2.6
   get: ^4.6.6
   flutter_quill: ^9.2.3
+  table_calendar: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
 
   assets:
     - assets/background.jpeg
+    - assets/image.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:todotick/Task/task.dart';
 
 class AddTaskPage extends StatefulWidget {
   final TextEditingController title;
   final TextEditingController description;
-  final quill.QuillController notes;
+  // final QuillController notes;
   final List<String> category;
   final List<int> reminder;
 
@@ -14,7 +15,7 @@ class AddTaskPage extends StatefulWidget {
     Key? key,
     required this.title,
     required this.description,
-    required this.notes,
+    // required this.notes,
     required this.category,
     required this.reminder,
   }) : super(key: key);
@@ -36,7 +37,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       firstDate: DateTime(2010),
       lastDate: DateTime(2100),
     );
-    if (picked != null) {
+    if (picked!= null) {
       setState(() {
         _dateController.text = DateFormat('dd-MM-yyyy').format(picked);
       });
@@ -48,11 +49,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
       context: context,
       initialTime: TimeOfDay.now(),
     );
-    if (picked != null) {
+    if (picked!= null) {
       setState(() {
         _timeController.text = picked.format(context);
       });
     }
+  }
+
+  void _saveTask() {
+    // Add your save task logic here
+    print('Title: ${widget.title.text}');
+    print('Description: ${widget.description.text}');
+    print('Category: $_selectedCategory');
+    print('Date: ${_dateController.text}');
+    print('Time: ${_timeController.text}');
+    // print('Notes: ${widget.notes.document.toPlainText()}');
+    // Add Firestore or other database save logic here
   }
 
   @override
@@ -88,7 +100,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   child: textItem('Time', _timeController, false, false, []),
                 ),
               ),
-              largeTextItem('Notes', widget.notes),
+              // largeTextItem('Notes', widget.notes),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context, 
+                    MaterialPageRoute(builder: (context)  => TaskPage())
+                    );
+                },
+                child: Text('Save'),
+              ),
             ],
           ),
         ),
@@ -98,7 +120,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   Widget textItem(
       String labelText,
-      TextEditingController controller,
+      TextEditingController textController,
       bool obscureText,
       bool isDropdown,
       List<String> dropdownItems,
@@ -113,7 +135,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         onChanged: (newValue) {
           setState(() {
             _selectedCategory = newValue;
-            controller.text = newValue ?? '';
+            textController.text = newValue?? '';
           });
         },
         items: dropdownItems.map((String value) {
@@ -145,7 +167,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       )
           : TextFormField(
-        controller: controller,
+        controller: textController,
         obscureText: obscureText,
         style: TextStyle(fontSize: 17, color: Colors.black),
         decoration: InputDecoration(
@@ -173,7 +195,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  Widget largeTextItem(String labelText, quill.QuillController controller) {
+  Widget largeTextItem(String labelText, QuillController controller) {
     return Container(
       width: double.infinity,
       height: 300,
@@ -198,6 +220,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 borderRadius: BorderRadius.circular(15),
               ),
+              // child: QuillEditor.basic(
+              //   controller: controller,s
+              //   readOnly: false, // true for view only mode
+              //   configurations: const QuillEditorConfigurations(
+              //     placeholder: 'Enter your notes...',
+              //     toolbarOptions: ToolbarOptions(
+              //       toolbarSize: 30,
+              //       toolbarIconSize: 20,
+              //     ), controller: null,
+              //   ),
+              // )
             ),
           ),
         ],
